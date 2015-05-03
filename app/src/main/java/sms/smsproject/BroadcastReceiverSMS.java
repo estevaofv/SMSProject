@@ -39,7 +39,7 @@ public class BroadcastReceiverSMS extends BroadcastReceiver {
         messages = null;
 
         if(token.isValid(message)){
-            notifyer.notify(message);
+            notifyer.notify(context,message);
         }
 
 

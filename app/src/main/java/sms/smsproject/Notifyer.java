@@ -2,7 +2,10 @@ package sms.smsproject;
 
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.net.Uri;
 import android.support.v4.app.NotificationCompat;
 
 /**
@@ -12,36 +15,51 @@ public class Notifyer {
 
     public static int NOTIFY_ID=100;
 
-    public void notify(String txt){
+    public void notify(Context context, String txt){
 
-        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(MyApp.getAppContext());
+        NotificationCompat.Builder mBuilder;
+        mBuilder = new NotificationCompat.Builder(context);
+
+        // ICONE
         mBuilder.setSmallIcon(R.drawable.alert);
-        mBuilder.setContentTitle("Status Machine");
-        mBuilder.setContentText("Click to process command");
+        //TITULO
+        mBuilder.setContentTitle("Machine Alert");
+        //TEXTO DA NOTIFICAÇÃO
+        mBuilder.setContentText("Process command");
+        //VIBRAR
+        mBuilder.setVibrate(new long[] { 1000, 1000, 1000, 1000, 1000 });
+        //LuZ DE ALERTA
+        mBuilder.setLights(Color.RED, 3000, 3000);
+        //SOM
+        Uri sound = Uri.parse("android.resource://" +
+                               context.getPackageName() +
+                               "/" + R.raw.alert);
+        mBuilder.setSound(sound);
 
 
-        Intent resultIntent = new Intent(MyApp.getAppContext(), ReceiveSMSActivity.class);
+        // INTENT PARA CHAMAR ACTIVITY
+        Intent intent = new Intent(context, ReceiveSMSActivity.class);
+        intent.putExtra(ReceiveSMSActivity.MSG_RECEVED, txt);
 
-        resultIntent.putExtra(ReceiveSMSActivity.MSG_RECEVED, txt);
 
+        // criando pendencia de chamada da activity
         PendingIntent resultPendingIntent =
                 PendingIntent.getActivity(
-                        MyApp.getAppContext(),
+                        context,
                         0,
-                        resultIntent,
-                        PendingIntent.FLAG_UPDATE_CURRENT
-                );
+                        intent,
+                        PendingIntent.FLAG_UPDATE_CURRENT);
 
         mBuilder.setContentIntent(resultPendingIntent);
 
 
 
-        // Gets an instance of the NotificationManager service
+        // Instância do gerenciador de notificações NotificationManager
         NotificationManager mNotifyMgr =
-                (NotificationManager) MyApp.getAppContext().getSystemService(MyApp.NOTIFICATION_SERVICE);
+            (NotificationManager) context.getSystemService(context.NOTIFICATION_SERVICE);
 
-        // Builds the notification and issues it.
-        mNotifyMgr.notify(NOTIFY_ID, mBuilder.build());
+        // NOTIFICA AO ANDROID com o id=100
+        mNotifyMgr.notify(100, mBuilder.build());
 
 
     }
