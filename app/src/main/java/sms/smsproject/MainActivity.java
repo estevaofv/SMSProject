@@ -36,7 +36,7 @@ public class MainActivity extends ActionBarActivity {
     public void enviar(View v){
         smsManager = SmsManager.getDefault();
 
-        String phoneNo = "06282220512";
+        String phoneNo = "06281685163";
 
         String txt = token.getToken() + "," + sms.getText().toString();
 
