@@ -20,6 +20,7 @@ public class MainActivity extends ActionBarActivity {
 
     private SmsManager smsManager;
     private EditText sms;
+
     private Tokenize token = new Tokenize();
 
     @Override
@@ -28,14 +29,14 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
         sms = (EditText)findViewById(R.id.sms);
 
-        //registerReceiver(broadcastReceiver, new IntentFilter("android.provider.Telephony.SMS_RECEIVED"));
+
     }
 
 
     public void enviar(View v){
         smsManager = SmsManager.getDefault();
 
-        String phoneNo = "06281685163";
+        String phoneNo = "06282220512";
 
         String txt = token.getToken() + "," + sms.getText().toString();
 
