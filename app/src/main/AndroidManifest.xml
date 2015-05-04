@@ -21,8 +21,6 @@
             </intent-filter>
         </activity>
 
-
-
         <receiver
             android:name=".BroadcastReceiverSMS"
             android:enabled="true"
@@ -36,6 +34,8 @@
             android:name=".ReceiveSMSActivity"
             android:label="@string/title_activity_receive_sms" >
         </activity>
+
+
     </application>
 
 </manifest>

@@ -26,7 +26,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="enviar"
+        android:text="@string/enviar"
         android:id="@+id/button"
         android:layout_below="@+id/sms"
         android:layout_alignRight="@+id/sms"
